@@ -57,7 +57,7 @@ script:
   #- php ~/build/fulldecent/pmtsystem/codeception/vendor/codeception/codeception/codecept run acceptance --steps --html
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - cat tests/acceptance.suite.yml
-  - php vendor/bin/codecept run acceptance --env firefox
+  - php vendor/bin/codecept run acceptance
   # Unit, integration and api tests, without code coverage
   #- sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
   #- sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' != 'mysql' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
