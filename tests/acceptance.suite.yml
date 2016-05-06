@@ -12,6 +12,6 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            url: 'https://localhost'
+            url: 'https://localhost/wb/hub/'
             browser: firefox
             user: 'root'
