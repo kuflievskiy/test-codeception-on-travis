@@ -38,7 +38,6 @@ before_install:
 
 before_script:
   # Make sure Webdriver is running
-  - curl http://localhost:4444/index.html
   - curl http://localhost:4444/wd/hub/status
 
   # Disable xdebug when we don't need coverage to speed up testing
