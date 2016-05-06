@@ -34,7 +34,7 @@ before_install:
   - sleep 3
   - wget https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar
   - java -jar selenium-server-standalone-2.47.0.jar -role hub -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
-  - sleep 20
+  - sleep 5
 
 before_script:
   # Make sure Webdriver is running
