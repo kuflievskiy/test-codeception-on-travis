@@ -80,6 +80,7 @@ script:
 
   # Acceptance tests, using Firefox, without code coverage
   - php vendor/bin/codecept bootstrap
+  - php vendor/bin/codecept build
   #- php ~/build/fulldecent/pmtsystem/codeception/vendor/codeception/codeception/codecept run acceptance --steps --html
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - cat tests/acceptance.suite.yml
