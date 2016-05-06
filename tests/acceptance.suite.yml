@@ -12,6 +12,11 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            url: 'https://localhost/wb/hub/'
+            url: 'http://127.0.0.1:8000/'
             browser: firefox
+            window_size: 1024x768
             user: 'root'
+            capabilities:
+                javascriptEnabled: true
+                webStorageEnabled: true
+                unexpectedAlertBehaviour: 'accept'
