@@ -39,6 +39,7 @@ before_install:
 before_script:
   # Make sure Webdriver is running
   - curl http://localhost:4444/wd/hub/status
+  - curl http://localhost:4444/wd/hub/index.html
 
   # Disable xdebug when we don't need coverage to speed up testing
   - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then phpenv config-rm xdebug.ini; fi;"
