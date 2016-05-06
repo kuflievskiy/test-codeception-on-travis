@@ -58,6 +58,11 @@ before_script:
   - git submodule update --init --recursive
   - sudo service apache2 restart
 
+  # Fluxbox
+  - sudo apt-get install fluxbox -y --force-yes
+  - fluxbox &
+  - sleep 3 # give fluxbox some time to start
+
   # Make sure Webdriver is running
   - curl http://localhost:4444/wd/hub/status
   - curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
