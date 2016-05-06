@@ -13,7 +13,7 @@ modules:
     config:
         WebDriver:
             url: http://localhost:8000
-            browser: firefox
+            browser: phantomjs
             window_size: 1024x768
             user: 'root'
             capabilities:
