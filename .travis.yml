@@ -12,8 +12,8 @@ env:
 addons:
   apt:
     packages:
-      - apache2
-      - libapache2-mod-fastcgi
+    - apache2
+    - libapache2-mod-fastcgi
 
 env:
   global:
