@@ -13,7 +13,7 @@ addons:
   apt:
     packages:
     - apache2
-    - firefox: "44.0.2"
+    - firefox
 
 env:
   global:
