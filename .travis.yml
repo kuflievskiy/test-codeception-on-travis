@@ -48,6 +48,8 @@ script:
   # Acceptance tests, using Firefox, without code coverage
   - php vendor/bin/codecept bootstrap
   #- php ~/build/fulldecent/pmtsystem/codeception/vendor/codeception/codeception/codecept run acceptance --steps --html
+
+  - cat tests/acceptance.suite.yml
   - php vendor/bin/codecept run acceptance --env firefox
   # Unit, integration and api tests, without code coverage
   #- sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
