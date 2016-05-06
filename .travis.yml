@@ -26,7 +26,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sleep 3
   - wget https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar
-  - java -jar selenium-server-standalone-2.47.0.jar -role hub -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
+  - java -jar selenium-server-standalone-2.47.0.jar -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
   - sleep 20
 
 before_script:
