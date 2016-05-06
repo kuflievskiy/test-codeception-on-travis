@@ -33,7 +33,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sleep 3
   - wget https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar
-  - java -jar selenium-server-standalone-2.47.0.jar -role hub -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
+  - java -jar selenium-server-standalone-2.47.0.jar -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
   - sleep 5
 
 before_script:  
@@ -66,6 +66,8 @@ script:
   # We can't use phpdbg only as it doesn't work with the webdriver and we can't use it for some tests only as we can't merge html reports
   # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
 
+after_failure:
+  - cat tests/_output/*
   # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
 notifications:
   email:
