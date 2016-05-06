@@ -27,9 +27,11 @@ before_install:
   - sleep 3
   - wget https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar
   - java -jar selenium-server-standalone-2.47.0.jar -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
+  - sleep 20
 
 before_script:
   # Make sure Webdriver is running
+  - curl http://localhost:4444/index.html
   - curl http://localhost:4444/wd/hub/status
 
   # Disable xdebug when we don't need coverage to speed up testing
