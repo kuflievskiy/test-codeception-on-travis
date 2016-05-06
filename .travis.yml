@@ -40,6 +40,7 @@ before_install:
 before_script:  
   # Make sure Webdriver is running
   - curl http://localhost:4444/wd/hub/status
+  - curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
 
   # Disable xdebug when we don't need coverage to speed up testing
   - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then phpenv config-rm xdebug.ini; fi;"
@@ -68,8 +69,9 @@ script:
   # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
 
 after_failure:
-  - cat tests/_output/report.html
+  - curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
   # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
+  - curl http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer
 notifications:
   email:
     kuflievskiy@gmail.com
