@@ -16,7 +16,3 @@ modules:
             browser: firefox
             window_size: 1024x768
             user: 'root'
-            capabilities:
-                javascriptEnabled: true
-                webStorageEnabled: true
-                unexpectedAlertBehaviour: 'accept'
