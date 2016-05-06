@@ -67,7 +67,7 @@ script:
   # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
 
 after_failure:
-  - cat tests/_output/*
+  - cat tests/_output/report.html
   # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
 notifications:
   email:
