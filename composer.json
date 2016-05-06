@@ -1,0 +1,23 @@
+{
+  "name": "kuflievskiy/test-codeception-on-travis",
+  "type": "project",
+  "description": "kuflievskiy/test-codeception-on-travis",
+  "homepage": "https://github.com/kuflievskiy/test-codeception-on-travis",
+  "authors": [
+    {
+      "name": "Kuflievskiy Aleksey",
+      "email": "kuflievskiy@gmail.com",
+      "role": "Developer",
+      "homepage": "https://github.com/kuflievskiy"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/kuflievskiy/test-codeception-on-travis/issues",
+    "wiki": "https://github.com/kuflievskiy/test-codeception-on-travis/wiki",
+    "source": "https://github.com/kuflievskiy/test-codeception-on-travis/gallery"
+  },
+  "require-dev": {
+    "codeception/codeception": "2.1.6",
+    "redmatter/codeception-multidb": " ~2.0@dev"
+  }
+}

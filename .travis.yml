@@ -1,0 +1,58 @@
+sudo: false
+language: php
+php:
+  - 5.6
+addons:
+  apt:
+    packages:
+      - graphviz
+      - gdb
+env:
+  global:
+    - CORE_BRANCH=master
+
+branches:
+  only:
+    - master
+    - /^stable\d+(\.\d+)?$/
+
+before_install:
+  # Disable opcache on PHP 7.0 as it crashes too easily
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ]; then sed -i '/opcache.so/d' ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;"
+  - php --modules
+
+  # Setup Selenium
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - sh -c "if [ ! -e ${TRAVIS_BUILD_DIR}/travis/lib-cache/selenium.jar ]; then wget -O ${TRAVIS_BUILD_DIR}/travis/lib-cache/selenium.jar https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar; fi;"
+  - java -jar ${TRAVIS_BUILD_DIR}/travis/lib-cache/selenium.jar -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
+
+before_script:
+  # Make sure Webdriver is running
+  - curl http://localhost:4444/wd/hub/status
+
+  # Disable xdebug when we don't need coverage to speed up testing
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then phpenv config-rm xdebug.ini; fi;"
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' != 'mysql' ]; then phpenv config-rm xdebug.ini; fi;"
+  # Always install the latest version of the xdebug PHP extension
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then cd build; bash xdebug_install.sh; cd ${TRAVIS_BUILD_DIR}/../core/apps/$APP_NAME; fi"
+
+  # Composer
+  - composer self-update
+  - composer update
+  #- composer install -o --prefer-dist --no-interaction
+  #- composer show -i
+
+script:
+
+  # Acceptance tests, using Firefox, without code coverage
+  - php vendor/bin/codecept run acceptance --env firefox
+  # Unit, integration and api tests, without code coverage
+  #- sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
+  #- sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' != 'mysql' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
+
+  # PHP 5.6 ONLY: Unit, integration and api tests with code coverage
+  #- sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then php vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
+  # We can't use phpdbg only as it doesn't work with the webdriver and we can't use it for some tests only as we can't merge html reports
+  # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
