@@ -48,7 +48,7 @@ script:
   # Acceptance tests, using Firefox, without code coverage
   - php vendor/bin/codecept bootstrap
   #- php ~/build/fulldecent/pmtsystem/codeception/vendor/codeception/codeception/codecept run acceptance --steps --html
-
+  - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - cat tests/acceptance.suite.yml
   - php vendor/bin/codecept run acceptance --env firefox
   # Unit, integration and api tests, without code coverage
