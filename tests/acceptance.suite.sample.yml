@@ -12,7 +12,5 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            host: localhost
-            port: 4444
-            url: 'http://localhost/'
-            browser: chrome
+            url: 'http://127.0.0.1:8000/'
+            browser: 'firefox'
