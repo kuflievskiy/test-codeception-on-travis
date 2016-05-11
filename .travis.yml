@@ -38,9 +38,9 @@ before_install:
   #- java -jar selenium-server-standalone-2.47.0.jar -port 4444
   #- sleep 5
 
-  php -S 0.0.0.0:8000
+  - php -S 0.0.0.0:8000
   # in new terminal window
-  docker run -i -t -p 4444:4444 -e APP_PORT=8000 davert/selenium-env
+  - docker run -i -t -p 4444:4444 -e APP_PORT=8000 davert/selenium-env
 
 before_script:  
   - sudo apt-get update -qq
