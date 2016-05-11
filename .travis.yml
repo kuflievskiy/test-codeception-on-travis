@@ -38,6 +38,7 @@ before_install:
   #- java -jar selenium-server-standalone-2.47.0.jar -port 4444
   #- sleep 5
 
+  # http://codeception.com/11-14-2014/dockerizing-acceptance-testing.html
   - php -S 0.0.0.0:8000 &
   # in new terminal window
   - docker pull davert/selenium-env
