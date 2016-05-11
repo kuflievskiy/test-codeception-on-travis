@@ -39,15 +39,15 @@ before_install:
   #- sleep 5
 
   # http://codeception.com/11-14-2014/dockerizing-acceptance-testing.html
-  - php -S 0.0.0.0:8000 &
+  #- php -S 0.0.0.0:8000 &
   # in new terminal window
   - docker pull davert/selenium-env
-  - docker run -i -t -p 4444:4444 -e APP_PORT=8000 davert/selenium-env >/dev/null 2>&1 &
+  - docker run -i -t -p 4444:4444 -e APP_HOST=myhost davert/selenium-env >/dev/null 2>&1 &
 
 before_script:  
   # Make sure Webdriver is running
-  - curl http://localhost:8000/wd/hub/status
-  - curl http://localhost:8000/wd/hub/  
+  - curl http://myhost/wd/hub/status
+  - curl http://myhost/wd/hub/  
   #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
 
   # Disable xdebug when we don't need coverage to speed up testing
