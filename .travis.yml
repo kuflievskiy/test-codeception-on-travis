@@ -75,9 +75,9 @@ script:
   # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
 
 after_failure:
-  - curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
+  #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
   # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
-  - curl http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer
+  #- curl http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer
 notifications:
   email:
     kuflievskiy@gmail.com
