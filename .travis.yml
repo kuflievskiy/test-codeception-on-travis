@@ -78,7 +78,7 @@ script:
 after_failure:
   #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
   # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
-  #- curl http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer
+  # - curl http://localhost:8000/selenium-server/driver/?cmd=shutDownSeleniumServer
 notifications:
   email:
     kuflievskiy@gmail.com
