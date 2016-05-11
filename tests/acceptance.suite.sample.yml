@@ -12,10 +12,9 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            url: 'http://localhost/'
+            url: 'http://localhost:4444/wd/hub'
             browser: firefox
             window_size: 1024x768
             user: 'root'
-            restart: true
             capabilities:
                 unexpectedAlertBehaviour: 'accept'
