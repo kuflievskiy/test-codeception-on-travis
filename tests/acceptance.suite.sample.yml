@@ -12,5 +12,5 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            url: 'http://0.0.0.0:4444/'
+            url: 'http://localhost:8080'
             browser: 'firefox'
