@@ -55,14 +55,14 @@ before_script:
 
   #- mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
   #- php -S 127.0.0.1:8000 -t public/ .htrouter.php >/dev/null 2>&1 &
-  - php -S 0.0.0.0:8080 &
+  - php -S 0.0.0.0:8000 &
 
   - stty cols 160
 
   # Make sure Webdriver is running
-  - curl http://localhost:8080/wd/hub/status
-  - curl http://localhost:8080/wd/hub/
-  - curl http://0.0.0.0:8080/
+  #- curl http://localhost:8080/wd/hub/status
+  #- curl http://localhost:8080/wd/hub/
+  - curl http://localhost:8000/
   #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
 
   # Disable xdebug when we don't need coverage to speed up testing
