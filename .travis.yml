@@ -28,23 +28,6 @@ before_install:
   # Disable opcache on PHP 7.0 as it crashes too easily
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ]; then sed -i '/opcache.so/d' ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;"
   - php --modules
-
-  # Setup Selenium
-  #- export DISPLAY=:99.0
-  #- sh -e /etc/init.d/xvfb start
-  #- sleep 3
-  #- wget https://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar
-  #- java -jar selenium-server-standalone-2.47.0.jar -port 4444 >/dev/null 2>&1 & # WARNING - Takes a long time to start up. Keep here
-  #- java -jar selenium-server-standalone-2.47.0.jar -port 4444
-  #- sleep 5
-
-  # http://codeception.com/11-14-2014/dockerizing-acceptance-testing.html
-  #- php -S 0.0.0.0:8080 &
-  # in new terminal window
-  #- docker pull davert/selenium-env
-  #- docker run -i -t -p 4444:4444 -e APP_PORT=8080 davert/selenium-env >/dev/null 2>&1 &
-  #- sleep 5
-
   - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
 
 before_script:
@@ -55,16 +38,8 @@ before_script:
   - sleep 5
 
   #- mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
-  #- php -S 127.0.0.1:8000 -t public/ .htrouter.php >/dev/null 2>&1 &
   - php -S 0.0.0.0:8000 &
-
   - stty cols 160
-
-  # Make sure Webdriver is running
-  #- curl http://localhost:8080/wd/hub/status
-  #- curl http://localhost:8080/wd/hub/
-  #- curl http://localhost:8000/
-  #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
 
   # Disable xdebug when we don't need coverage to speed up testing
   - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then phpenv config-rm xdebug.ini; fi;"
@@ -72,31 +47,16 @@ before_script:
   # Composer
   - composer self-update
   - composer update
-  #- composer install -o --prefer-dist --no-interaction
-  #- composer show -i
 
 script:
 
   # Acceptance tests, using Firefox, without code coverage
   - php vendor/bin/codecept bootstrap
   - php vendor/bin/codecept build
-  #- php ~/build/fulldecent/pmtsystem/codeception/vendor/codeception/codeception/codecept run acceptance --steps --html
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - cat tests/acceptance.suite.yml
-  - php vendor/bin/codecept run acceptance
-  # Unit, integration and api tests, without code coverage
-  #- sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
-  #- sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' != 'mysql' ]; then php vendor/bin/codecept run api,integration,unit; fi;"
+  - php vendor/bin/codecept run acceptance --steps --html
 
-  # PHP 5.6 ONLY: Unit, integration and api tests with code coverage
-  #- sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then php vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
-  # We can't use phpdbg only as it doesn't work with the webdriver and we can't use it for some tests only as we can't merge html reports
-  # - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then phpenv config-rm xdebug.ini; phpdbg -qrr vendor/bin/codecept run api,integration,unit --coverage --coverage-xml --coverage-html; fi;"
-
-after_failure:
-  #- curl http://127.0.0.1:4444/wd/hub/static/resource/hub.html
-  # '/home/travis/build/kuflievskiy/test-codeception-on-travis/tests/_output
-  # - curl http://localhost:8000/selenium-server/driver/?cmd=shutDownSeleniumServer
 notifications:
   email:
     kuflievskiy@gmail.com
