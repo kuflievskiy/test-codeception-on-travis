@@ -50,7 +50,7 @@ before_script:
 
 script:
 
-  # Acceptance tests, using Firefox, without code coverage
+  # Run Codeception Acceptance tests
   - php vendor/bin/codecept bootstrap
   - php vendor/bin/codecept build
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
