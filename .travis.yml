@@ -37,7 +37,8 @@ before_script:
   - java -jar selenium-server-standalone-2.48.2.jar -port 4444 >/dev/null 2>&1 &
   - sleep 5
 
-  #- mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
+  - mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
+  - mysql -u root -p'' testdb < dump/db.sql
   - php -S 0.0.0.0:8000 &
   - stty cols 160
 
