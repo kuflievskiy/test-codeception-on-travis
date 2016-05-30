@@ -9,7 +9,7 @@ modules:
     enabled:
         - WebDriver
         - Asserts
-        - \Helper\Acceptance
+        - AcceptanceHelper
         - Db:
            dsn: 'mysql:host=localhost;dbname=testdb'
            user: 'root'
