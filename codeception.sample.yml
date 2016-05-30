@@ -1,0 +1,24 @@
+paths:
+    tests: tests
+    log: tests/log
+    data: tests/data
+    support: tests/support
+    envs: tests/envs
+settings:
+    shuffle: true
+    bootstrap: _bootstrap.php
+    suite_class: \PHPUnit_Framework_TestSuite
+    colors: true
+    memory_limit: 1024M
+    log: true
+    lint: false
+modules:
+    config:
+        - Db:
+           dsn: 'mysql:host=localhost;dbname=testdb'
+           user: 'root'
+           password: ''
+           dump: 'tests/dump/db.sql'
+           populate: true
+           cleanup: false
+           reconnect: true

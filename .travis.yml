@@ -55,6 +55,7 @@ script:
   - php vendor/bin/codecept bootstrap
   - php vendor/bin/codecept build
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
+  - mv -f codeception.sample.yml codeception.yml
   - cat tests/acceptance.suite.yml
   - php vendor/bin/codecept run acceptance --steps --html
 
