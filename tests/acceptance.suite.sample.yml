@@ -11,13 +11,6 @@ modules:
         - Asserts
         - \Helper\Acceptance
         - Db:
-           dsn: 'mysql:host=localhost;dbname=testdb'
-           user: 'root'
-           password: ''
-           dump: 'tests/dump/db.sql'
-           populate: true
-           cleanup: false
-           reconnect: true
     config:
         WebDriver:
             url: 'http://localhost:8000'
