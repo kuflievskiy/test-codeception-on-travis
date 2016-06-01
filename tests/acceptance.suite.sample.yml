@@ -10,7 +10,7 @@ modules:
         - WebDriver
         - Asserts
         - \Helper\Acceptance
-        - Db:
+        - Db
     config:
         WebDriver:
             url: 'http://localhost:8000'
