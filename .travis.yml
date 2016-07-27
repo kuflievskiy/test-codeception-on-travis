@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 
 language: php
 php:
@@ -6,9 +6,7 @@ php:
   - 7  
 services:
   - mysql
-  - openssl
-  - curl
-  - session
+  - docker
 env:
     - CUSTOM_VAR_1=latest CUSTOM_VAR_2=0
 addons:
@@ -38,8 +36,14 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - java -jar selenium-server-standalone-2.48.2.jar -port 4444 >/dev/null 2>&1 &
   - sleep 5
+  #- docker run -p 3306:3306 mysql -d some-mysql-image
+  - docker pull mysql
+  - docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQL_USER="root" -e MYSQL_PASS='' -d mysql:latest
 
-  - mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
+  #docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
+  - docker ps -a
+  - mysqladmin create testdb --user="root" --password=""
+
   - php -S 0.0.0.0:8000 &
   - stty cols 160
 
