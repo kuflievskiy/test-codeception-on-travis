@@ -38,7 +38,7 @@ before_script:
   - sleep 5
   #- docker run -p 3306:3306 mysql -d some-mysql-image
   - docker run -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
-
+  - docker ps -a
   - mysql -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
   - php -S 0.0.0.0:8000 &
   - stty cols 160
