@@ -45,7 +45,7 @@ before_script:
   #- stty cols 160
 
   # http://codeception.com/11-14-2014/dockerizing-acceptance-testing.html
-  docker run -i -t -p 4444:4444 -e APP_PORT=8000 davert/selenium-env
+  - docker run -i -t -p 4444:4444 -e APP_PORT=8000 davert/selenium-env
 
   # Disable xdebug when we don't need coverage to speed up testing
   - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.0' ]; then phpenv config-rm xdebug.ini; fi;"
