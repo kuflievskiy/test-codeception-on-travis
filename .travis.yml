@@ -31,7 +31,7 @@ before_install:
   # Disable opcache on PHP 7.0 as it crashes too easily
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ]; then sed -i '/opcache.so/d' ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;"
   - php --modules
-  - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+  #- wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
 
 before_script:
 
