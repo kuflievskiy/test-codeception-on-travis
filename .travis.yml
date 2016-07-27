@@ -42,7 +42,8 @@ before_script:
 
   #docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
   - docker ps -a
-  - mysql -uroot -p'' -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
+  - mysqladmin create testdb --user="root" --password=""
+
   - php -S 0.0.0.0:8000 &
   - stty cols 160
 
