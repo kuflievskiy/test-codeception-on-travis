@@ -37,7 +37,11 @@ before_script:
   - java -jar selenium-server-standalone-2.48.2.jar -port 4444 >/dev/null 2>&1 &
   - sleep 5
   #- docker run -p 3306:3306 mysql -d some-mysql-image
-  - docker run --net=host -h localhost -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
+  - docker pull mysql
+  - docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD='' -d mysql:latest
+  - docker-machine ip default
+
+  #docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
   - docker ps -a
   - mysql -h localhost -e 'CREATE DATABASE testdb CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
   - php -S 0.0.0.0:8000 &
