@@ -38,7 +38,7 @@ before_script:
   - sleep 5
   #- docker run -p 3306:3306 mysql -d some-mysql-image
   - docker pull mysql
-  - docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQL_ROOT_NAME="root" MYSQL_ROOT_PASSWORD='' -d mysql:latest
+  - docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQL_USER="root" -e MYSQL_PASS='' -d mysql:latest
 
   #docker run -h localhost -p 3306:3306 --name some-mysql -e MYSQLROOTPASSWORD='' -d mysql
   - docker ps -a
